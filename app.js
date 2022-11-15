@@ -1,0 +1,32 @@
+// UI object
+const ui = new UI()
+
+// event elements
+const test_book = new Book("Tõde ja õigus", "A. H. Tammsaare", 9176762)
+
+// events
+const submit = document.querySelector("#submit")
+submit.addEventListener("click", addBook)
+
+function addBook(e) {
+    // Text inputs
+    const bookTitleElement = document.querySelector("#title")
+    const bookAuthorElement = document.querySelector("#author")
+    const bookISBNElement = document.querySelector("#isbn")
+
+    let title = bookTitleElement.value
+    let author = bookAuthorElement.value
+    let isbn = bookISBNElement.value
+
+    // create book
+    const book = new Book(title, author, isbn)
+
+    // add book value to interface by UI object
+    ui.addBook(book)
+
+    // clear user input
+    bookTitleElement.value = ""
+    bookAuthorElement.value = ""
+    bookISBNElement.value = ""
+    e.preventDefault()
+}
