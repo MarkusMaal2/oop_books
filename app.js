@@ -8,6 +8,15 @@ const test_book = new Book("Tõde ja õigus", "A. H. Tammsaare", 9176762)
 // events
 const submit = document.querySelector("#submit")
 submit.addEventListener("click", addBook)
+document.addEventListener("DOMContentLoaded", getBooks)
+
+function getBooks() {
+    let books = ls.getData("books")
+    for (let i = 0; i < books.length; i++) {
+        let book = books[i]
+        ui.addBook(book)
+    }
+}
 
 function addBook(e) {
     // Text inputs
