@@ -1,5 +1,6 @@
 // UI object
 const ui = new UI()
+const ls = new LS()
 
 // event elements
 const test_book = new Book("Tõde ja õigus", "A. H. Tammsaare", 9176762)
@@ -23,6 +24,8 @@ function addBook(e) {
 
     // add book value to interface by UI object
     ui.addBook(book)
+    // add book to LS
+    ls.addBook(book)
 
     // clear user input
     bookTitleElement.value = ""
