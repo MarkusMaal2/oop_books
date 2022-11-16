@@ -19,4 +19,20 @@ class LS {
         books.push(book)
         this.setData("books", books)
     }
+
+    delBook(book) {
+        let books
+        if (localStorage.getItem("books") === null) {
+            books = []
+        } else {
+            books = JSON.parse(localStorage.getItem("books"))
+            books.forEach((book, i) => {
+                let lsBook = new Book(books[i].title, books[i].author, books[i].isbn)
+                if(lsBook.title === book.title && lsBook.author === book.author && lsBook.isbn === book.isbn){
+                    books.splice(i, 1)
+                }
+            })
+        }
+        localStorage.setItem("books", JSON.stringify(books))
+    }
 }

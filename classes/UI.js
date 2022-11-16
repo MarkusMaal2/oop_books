@@ -47,4 +47,8 @@ class UI {
         const bookList = document.querySelector("#booklist")
         bookList.appendChild(newBook)
     }
+
+    delBook(book) {
+        book.remove()
+    }
 }

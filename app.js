@@ -4,10 +4,12 @@ const ls = new LS()
 
 // event elements
 const test_book = new Book("Tõde ja õigus", "A. H. Tammsaare", 9176762)
+const bookList = document.querySelector("#booklist")
 
 // events
 const submit = document.querySelector("#submit")
 submit.addEventListener("click", addBook)
+bookList.addEventListener("click", deleteBook)
 document.addEventListener("DOMContentLoaded", getBooks)
 
 function getBooks() {
@@ -40,5 +42,26 @@ function addBook(e) {
     bookTitleElement.value = ""
     bookAuthorElement.value = ""
     bookISBNElement.value = ""
+    e.preventDefault()
+}
+
+
+function deleteBook(e) {
+    if (e.target.textContent === "X") {
+        // ask for user confirmation
+        if (confirm(`Are you sure you want to delete this book from the list?`)) {
+            // create book object for deletion
+            const target = e.target.parentElement.parentElement
+            let title = target.children[0].textContent
+            let author = target.children[1].textContent
+            let isbn = target.children[2].textContent
+            isbn = isbn.slice(0, isbn.length - 1)
+            const book = new Book(title, author, isbn)
+            // delete from UI
+            ui.delBook(target)
+            // delete from localStorage
+            ls.delBook(book)
+        }
+    }
     e.preventDefault()
 }
